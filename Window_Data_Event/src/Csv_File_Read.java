@@ -9,7 +9,7 @@ public class Csv_File_Read
 
 	public static void main(String[] args) throws IOException
 	{
-		String filename="f://window/data1.csv";
+		String filename="f://window/data.csv";
 		FileReader file=new FileReader(filename);
 	    System.out.println("input the event id ");
 	    int event;
