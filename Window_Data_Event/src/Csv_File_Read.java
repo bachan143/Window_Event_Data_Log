@@ -9,12 +9,12 @@ public class Csv_File_Read
 
 	public static void main(String[] args) throws IOException
 	{
-		String filename="f://window/data.csv";
+		String filename="f://window/data1.csv";
 		FileReader file=new FileReader(filename);
-	    System.out.println("input the event id ");
-	    int event;
-		Scanner sc=new Scanner(System.in);
-		event=sc.nextInt();
+	    //System.out.println("input the event id ");
+	   // String event;
+		//Scanner sc=new Scanner(System.in);
+		//event=sc.next();
 		try {
 			int i;
 			
@@ -22,11 +22,16 @@ public class Csv_File_Read
 			while((i=file.read())!=-1)
 			{
 				
+			    System.out.print((char)i);
+					
+				      
+			   }
+				
 			
 				
-				System.out.print((char)i);
-			}
-			System.out.println();
+				
+			
+			
 		
 		} 
 		catch (FileNotFoundException e) 
