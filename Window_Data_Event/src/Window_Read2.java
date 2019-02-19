@@ -5,13 +5,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 class Detalis
 {
-	String label;
-	String date_time;
-	String sourse;
-	int event_Id;
-	String task_category;
+	private String label;
+	private String date;
+	private String time;
+	private String sourse;
+	private int event_Id;
+	private String task_category;
+	
 	
 
     public void setLabel(String label) 
@@ -22,14 +26,23 @@ class Detalis
 	{
         return label;
     }
-    public void setDate_Time(String date_time) 
+    public void setDate(String date) 
     {
-        this.date_time = date_time;
+        this.date = date;
     }
 
-    public String getDate_Time()
+    public String getDate()
     {
-    	return date_time;
+    	return date;
+    }
+    public void setTime(String time) 
+    {
+        this.time = time;
+    }
+
+    public String getTime()
+    {
+    	return time;
     }
     public void setSourse(String sourse)
     {
@@ -56,8 +69,15 @@ class Detalis
 	{
 		return task_category;
 	}
-	ArrayList<Detalis> obj=new ArrayList<Detalis>();
-	//obj=
+	
+	
+	public String toString() {
+		return "\nDetalis [label=" + getLabel() + ", date=" + getDate()+ ",time="+getTime()+","
+				+ " sourse=" + getSourse() + ", event_Id=" + getEvent_Id()
+				+ ", task_category=" + getTask_Category() + "]";
+	}
+	
+	
 }
  
 
@@ -65,20 +85,61 @@ public class Window_Read2
 {
 	public static void main(String[] args)
 	{
+		System.out.println("input the Eventid");
+		Scanner sc=new Scanner(System.in);
+		int eventid=sc.nextInt();
 		
 		BufferedReader buffer = null;
+		String line=null;
+		Scanner scanner=null;
+		int index=0;
+	
+		List<Detalis> detalis=new ArrayList<>();
 		
 		try
 		{
-			String line;
-			buffer = new BufferedReader(new FileReader("f://window/bachan.csv"));
+			
+			
+			buffer = new BufferedReader(new FileReader("f://window/bachan100.csv"));
 			
 		
 			while ((line = buffer.readLine()) != null) 
 			{
-				//System.out.println(line);
-				System.out.println(  toArrayList(line) + "\n");
+				Detalis det = new Detalis();
+				scanner = new Scanner(line);
+				while(scanner.hasNext())
+				{
+					
+					
+					String data = scanner.next();
+						
+					  if (index == 0)
+						det.setLabel(data);
+					  else if (index == 1)
+						det.setDate(data);
+					  else if(index==2)
+						  det.setTime(data);
+					   
+					  else if (index == 3)
+					   	det.setSourse(data);
+					   else if (index == 4)
+						det.setEvent_Id(Integer.parseInt(data));
+						else if (index == 5)
+							det.setTask_Category(data);
+					  index++;
+					  
+				
+					
+				}
+				index=0;
+				detalis.add(det);
+				System.out.println("================");
+				
+			
+				
+				
 			}
+			System.out.println(detalis);
 			
 		}
 		catch (IOException e)
@@ -97,25 +158,7 @@ public class Window_Read2
 			}
 		}
 	}
+}
 	
 
-	public static ArrayList<String> toArrayList(String csv)
-	{
-		ArrayList<String> result = new ArrayList<String>();
-		
-		if (csv != null) 
-		{
-			String[] splitData = csv.split("\\s*,\\s*");
-			for (int i = 0; i < splitData.length; i++)
-			{
-				if (!(splitData[i] == null) || !(splitData[i].length() == 0)) 
-				{
-					result.add(splitData[i].trim());
-				}
-			}
-		}
-		
-		return result;
-	}
 	
-}
